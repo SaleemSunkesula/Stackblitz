@@ -1,0 +1,32 @@
+<div class="container">
+  <h1>Train Seat Booking</h1>
+  <form (ngSubmit)="bookSeats()">
+    <label for="num_seats">Number of seats to book:</label>
+    <input
+      type="number"
+      id="num_seats"
+      [(ngModel)]="requestedSeats"
+      name="num_seats"
+      min="1"
+      max="7"
+      required
+    />
+    <button type="submit">Book Seats</button>
+  </form>
+
+  <div *ngIf="bookedSeats.length > 0">
+    <h2>Booked Seats: {{ bookedSeats }}</h2>
+  </div>
+  <div *ngIf="errorMessage" style="color: red;">
+    <h2>{{ errorMessage }}</h2>
+  </div>
+
+  <div class="seats">
+    <div
+      *ngFor="let seat of seats; let i = index"
+      [ngClass]="{ available: seat === 'Available', booked: seat === 'Booked' }"
+    >
+      {{ i + 1 }}
+    </div>
+  </div>
+</div>
